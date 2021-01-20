@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { getUser } from '../../utilities/users-service';
 import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
 import NewDrinkPage from '../NewDrinkPage/NewDrinkPage';
@@ -7,12 +8,13 @@ import DrinkHistoryPage from '../DrinkHistoryPage/DrinkHistoryPage';
 import NavBar from '../../components/NavBar/NavBar';
 
 export default function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(getUser());
+
   return (
     <main className="App">
-      {user ?
+      { user ?
           <>
-            <NavBar />
+            <NavBar user={user} setUser={setUser} />
             <Switch>
               <Route path="/drinks/new">
                 <NewDrinkPage />
@@ -20,13 +22,12 @@ export default function App() {
               <Route path="/drinks">
                 <DrinkHistoryPage />
               </Route>
-              <Redirect to="/drinks"/>
+              <Redirect to="/drinks" />
             </Switch>
           </>
         :
-          <AuthPage />
+          <AuthPage setUser={setUser}/>
       }
     </main>
   );
 }
-
