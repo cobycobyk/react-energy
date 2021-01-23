@@ -4,8 +4,7 @@ import { getUser } from '../../utilities/users-service';
 import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
 import NewDrinkPage from '../NewDrinkPage/NewDrinkPage';
-import DrinkHistoryPage from '../DrinkHistoryPage/DrinkHistoryPage';
-import NavBar from '../../components/NavBar/NavBar';
+import DrinkListPage from '../DrinkListPage/DrinkListPage';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -14,13 +13,12 @@ export default function App() {
     <main className="App">
       { user ?
           <>
-            <NavBar user={user} setUser={setUser} />
             <Switch>
+              <Route path="/drinks">
+                <DrinkListPage user={user} setUser={setUser}/>
+              </Route>
               <Route path="/drinks/new">
                 <NewDrinkPage />
-              </Route>
-              <Route path="/drinks">
-                <DrinkHistoryPage />
               </Route>
               <Redirect to="/drinks" />
             </Switch>

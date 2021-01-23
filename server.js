@@ -18,6 +18,10 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use(require('./config/checkToken'));
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
+
+// Put API routes here, before the "catch all" route
+const ensureLoggedIn = require('./config/ensureLoggedIn');
+app.use('/api/drinks', ensureLoggedIn, require('./routes/api/drinks'));
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
 app.get('/*', function(req, res) {

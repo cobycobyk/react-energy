@@ -1,5 +1,5 @@
-export default function NewDrink() {
+export default function() {
   return (
-    <h1>NewDrinkPage</h1>
+    <div>New Drink Page</div>
   )
 }
