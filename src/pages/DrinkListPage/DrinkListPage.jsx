@@ -11,7 +11,8 @@ import UserLogOut from '../../components/UserLogOut/UserLogOut';
 export default function ({ user, setUser }) {
 
   const [drinkItems, setDrinkItems] = useState([]);
-  const [activeBd, setActiveBd] = useState('');
+  const [activeBd, setActiveBd] = useState(''); 
+  const [drink, setDrink] = useState(null);
   const brandsRef = useRef([]);
 
   useEffect(function() {
@@ -25,7 +26,13 @@ export default function ({ user, setUser }) {
       setActiveBd(items[0].brand.name);
     }
     getItems();
-  }, [])
+  }, []);
+
+  async function handleDetail(itemId) {
+    const drink = await drinkAPI.getById(itemId);
+    console.log('drink')
+    setDrink(drink);
+  }
 
   return (
     <main className="DrinkListPage">
@@ -40,9 +47,9 @@ export default function ({ user, setUser }) {
       </aside>
       <DrinkList
       drinkItems={drinkItems.filter(item => item.brand.name === activeBd)}
-      // handleAddToOrder={handleAddToOrder}
+      handleDetail={handleDetail}
       />
-      <DrinkDetail />
+      <DrinkDetail drink={drink}/>
     </main>
   );
 }

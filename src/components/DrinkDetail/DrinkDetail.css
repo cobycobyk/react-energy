@@ -1,0 +1,27 @@
+.DrinkDetail {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3vmin;
+  font-size: 2vmin;
+  color: var(--text-light);
+
+}
+
+.DrinkDetail .section-heading {
+  width: 100%;
+}
+.DrinkDetail > .image > img {
+  max-width: 200px;
+  max-height: 200px;
+  justify-content: center;
+  margin-top: 10px;
+}
+.DrinkDetail > .price {
+  flex-direction: row;
+  justify-content: center;
+  font-weight: 600;
+  font-size: large;
+  color: black;
+}
+

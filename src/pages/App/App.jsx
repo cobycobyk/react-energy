@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
 import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
-import NewDrinkPage from '../NewDrinkPage/NewDrinkPage';
+import AddDrinkPage from '../AddDrinkPage/AddDrinkPage';
 import DrinkListPage from '../DrinkListPage/DrinkListPage';
 
 export default function App() {
@@ -14,11 +14,11 @@ export default function App() {
       { user ?
           <>
             <Switch>
+              <Route path="/drinks/new">
+                <AddDrinkPage user={user} setUser={setUser}/>
+              </Route>
               <Route path="/drinks">
                 <DrinkListPage user={user} setUser={setUser}/>
-              </Route>
-              <Route path="/drinks/new">
-                <NewDrinkPage />
               </Route>
               <Redirect to="/drinks" />
             </Switch>
