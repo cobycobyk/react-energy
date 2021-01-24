@@ -1,8 +1,13 @@
 import {Component, useState, useRef, useEffect } from 'react';
 import * as drinkAPI from '../../utilities/drink-api';
+import BrandListItems from '../../components/BrandListItems/BrandListItems';
+
+
 
 
 export default function AddDrinkPage(props){
+  // const names = [];
+  // const brands = Brand.find({}).sort('name').then(b => b.forEach(a => names.push(a.name)));
   const [invalidForm, setValidForm] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -10,6 +15,8 @@ export default function AddDrinkPage(props){
     image: '',
     price: 0,
   })
+
+
 
   const formRef = useRef();
 
@@ -46,13 +53,16 @@ export default function AddDrinkPage(props){
         </div>
         <div className="form-group">
           <label>Drink Brand (required)</label>
-          <input
+          <select 
             className="form-control"
             name="brand"
-            value={ formData.brand}
+            value={formData.brand}
             onChange={handleChange}
             required
-          />
+            >
+           <BrandListItems brands={props.brands.current}/>
+
+          </select>
         </div>
         <div className="form-group">
           <label>Drink Image URL</label>

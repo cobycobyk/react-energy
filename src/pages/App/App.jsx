@@ -12,6 +12,7 @@ export default function App() {
   const [drinkItems, setDrinkItems] = useState([]);
   const [activeBd, setActiveBd] = useState('');
   const brandsRef = useRef([]);
+  const brandNameRef = useRef([])
 
   useEffect(function() {
     async function getItems() {
@@ -24,6 +25,14 @@ export default function App() {
       setActiveBd(items[0].brand.name);
     }
     getItems();
+    async function getBrands() {
+      const items = await drinkAPI.getAll();
+      brandNameRef.current = items.reduce((bds, item) => {
+        const bd = item.brand.name;
+        return bds.includes(bd) ? bds : [...bds, bd]
+      }, []);
+    }
+      getBrands();
   }, []);
 
   async function handleAddDrink(newDrinkData){
@@ -37,7 +46,7 @@ export default function App() {
           <>
             <Switch>
               <Route path="/drinks/new">
-                <AddDrinkPage handleAddDrink={handleAddDrink} user={user} setUser={setUser}/>
+                <AddDrinkPage brands={brandNameRef} handleAddDrink={handleAddDrink} user={user} setUser={setUser}/>
               </Route>
               <Route path="/drinks">
                 <DrinkListPage brandsRef={brandsRef} setActiveBd={setActiveBd} activeBd={activeBd} setDrinkItems={setDrinkItems} drinkItems={drinkItems} user={user} setUser={setUser}/>
