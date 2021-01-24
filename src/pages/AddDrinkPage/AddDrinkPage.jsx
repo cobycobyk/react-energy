@@ -2,8 +2,7 @@ import {Component, useState, useRef, useEffect } from 'react';
 import * as drinkAPI from '../../utilities/drink-api';
 
 
-export default function AddDrinkPage(){
-  const [drinkItems, setDrinkItems] = useState([]);
+export default function AddDrinkPage(props){
   const [invalidForm, setValidForm] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -18,15 +17,11 @@ export default function AddDrinkPage(){
     formRef.current.checkValidity() ? setValidForm(false) : setValidForm(true);
   });
 
-  // async function handleAddDrink(newDrinkData){
-  //   const newDrink = await drinkAPI.create(newDrinkData);
-  //   setDrinkItems([...drinkItems, newDrink])
-  // }
-  async function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    const newDrink = await drinkAPI.create(e);
-    // handleAddDrink(formData); 
+    props.handleAddDrink(formData);
   }
+
 
   const handleChange = (e) => {
     setFormData({

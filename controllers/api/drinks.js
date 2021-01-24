@@ -15,11 +15,11 @@ async function index(req, res) {
 
 async function show(req, res) {
   const item = await Drink.findById(req.params.id)
-  console.log('drink', item)
   res.json(item);
 }
 
 async function create(req, res) {
+  console.log('createcontroller')
   const drink = await Drink.create(req.body);
   res.status(201).json(drink);
 }

@@ -8,25 +8,12 @@ import DrinkDetail from '../../components/DrinkDetail/DrinkDetail';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 
 
-export default function ({ user, setUser }) {
+export default function ({ user, setUser, drinkItems, setDrinkItems, activeBd, setActiveBd, brandsRef }) {
 
-  const [drinkItems, setDrinkItems] = useState([]);
-  const [activeBd, setActiveBd] = useState(''); 
+  
+ 
   const [drink, setDrink] = useState(null);
-  const brandsRef = useRef([]);
 
-  useEffect(function() {
-    async function getItems() {
-      const items = await drinkAPI.getAll();
-      brandsRef.current = items.reduce((bds, item) => {
-        const bd = item.brand.name;
-        return bds.includes(bd) ? bds : [...bds, bd]
-      }, []);
-      setDrinkItems(items);
-      setActiveBd(items[0].brand.name);
-    }
-    getItems();
-  }, []);
 
   async function handleDetail(itemId) {
     const drink = await drinkAPI.getById(itemId);
