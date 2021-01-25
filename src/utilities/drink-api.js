@@ -10,14 +10,14 @@ export function getById(id) {
   return sendRequest(`${BASE_URL}/${id}`)
 }
 
-// export function create(drink) {
-//   return sendRequest(`${BASE_URL}/new`, 'POST', drink)
-// }
-export function create(pup) {
-  console.log('create api')
-  return fetch(`${BASE_URL}/new`, {
-    method: 'POST',
-    headers: {'content-type': 'application/json'},
-    body: JSON.stringify(pup)
-  }).then(res => res.json());
+export function create(drink) {
+  return sendRequest(`${BASE_URL}/new`, 'POST', drink)
 }
+// export function create(pup) {
+//   console.log('create api')
+//   return fetch(`${BASE_URL}/new`, {
+//     method: 'POST',
+//     headers: {'content-type': 'application/json'},
+//     body: JSON.stringify(pup)
+//   }).then(res => res.json());
+// }

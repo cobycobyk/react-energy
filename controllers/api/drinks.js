@@ -1,4 +1,5 @@
 const Drink = require('../../models/drink');
+const Brand = require('../../models/brand');
 
 module.exports = {
   index,
@@ -19,7 +20,7 @@ async function show(req, res) {
 }
 
 async function create(req, res) {
-  console.log('createcontroller')
+  console.log(req.body)
   const drink = await Drink.create(req.body);
   res.status(201).json(drink);
 }

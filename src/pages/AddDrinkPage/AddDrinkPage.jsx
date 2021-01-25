@@ -1,13 +1,10 @@
-import {Component, useState, useRef, useEffect } from 'react';
-import * as drinkAPI from '../../utilities/drink-api';
+import { useState, useRef, useEffect } from 'react';
 import BrandListItems from '../../components/BrandListItems/BrandListItems';
 
 
 
 
 export default function AddDrinkPage(props){
-  // const names = [];
-  // const brands = Brand.find({}).sort('name').then(b => b.forEach(a => names.push(a.name)));
   const [invalidForm, setValidForm] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -16,13 +13,14 @@ export default function AddDrinkPage(props){
     price: 0,
   })
 
-
-
   const formRef = useRef();
 
   useEffect(() => {
     formRef.current.checkValidity() ? setValidForm(false) : setValidForm(true);
   });
+  useEffect(function() {
+    if (props.brands.length) setFormData({...formData, brand: props.brands[0]._id})
+  }, [props.brands])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -60,7 +58,7 @@ export default function AddDrinkPage(props){
             onChange={handleChange}
             required
             >
-           <BrandListItems brands={props.brands.current}/>
+           <BrandListItems brands={props.brands}/>
 
           </select>
         </div>

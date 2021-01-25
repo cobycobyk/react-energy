@@ -1,15 +1,17 @@
 import './BrandList.css';
 
-export default function BrandListItems({brands}) {
-  const bds = brands.map(bd => 
+export default function BrandListItems({ brands }) {
+  const bds = brands.map(bd =>
     <option
-      key={bd}
+      key={bd._id}
+      value={bd._id}
     >
-      {bd}
+      {bd.name}
     </option>
-  );  return (
+  );
+  return (
     <>
       {bds}
-  </>
+    </>
   );
 }

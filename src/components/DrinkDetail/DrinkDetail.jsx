@@ -1,4 +1,5 @@
 import './DrinkDetail.css';
+import {Link} from 'react-router-dom';
 
 export default function DrinkDetail({ drink }) {
   if (!drink) return null
@@ -12,6 +13,13 @@ export default function DrinkDetail({ drink }) {
       <br/>
       &nbsp;
       <div className="price">Price: ${drink.price}</div>
+      <Link
+      className='btn btn-xs btn-warning'
+      to={{
+        pathname: '/details',
+        state: {drink},
+      }}
+      >All Details</Link>
     </div>
   )
 }

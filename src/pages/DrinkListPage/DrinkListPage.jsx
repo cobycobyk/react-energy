@@ -8,16 +8,15 @@ import DrinkDetail from '../../components/DrinkDetail/DrinkDetail';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 
 
-export default function ({ user, setUser, drinkItems, setDrinkItems, activeBd, setActiveBd, brandsRef }) {
+export default function ({ user, setUser, drinkItems, setDrinkItems, activeBd, setActiveBd, brands }) {
 
-  
- 
+
+
   const [drink, setDrink] = useState(null);
 
 
   async function handleDetail(itemId) {
     const drink = await drinkAPI.getById(itemId);
-    console.log('drink')
     setDrink(drink);
   }
 
@@ -25,18 +24,18 @@ export default function ({ user, setUser, drinkItems, setDrinkItems, activeBd, s
     <main className="DrinkListPage">
       <aside>
         <BrandList
-        brands={brandsRef.current}
-        activeBd={activeBd}
-        setActiveBd={setActiveBd}
+          brands={brands}
+          activeBd={activeBd}
+          setActiveBd={setActiveBd}
         />
-      <Link to="/drinks/new" className="button btn-sm">New Drink</Link>
-      <UserLogOut user={user} setUser={setUser} />
+        <Link to="/drinks/new" className="button btn-sm">New Drink</Link>
+        <UserLogOut user={user} setUser={setUser} />
       </aside>
       <DrinkList
-      drinkItems={drinkItems.filter(item => item.brand.name === activeBd)}
-      handleDetail={handleDetail}
+        drinkItems={drinkItems.filter(item => item.brand.name === activeBd)}
+        handleDetail={handleDetail}
       />
-      <DrinkDetail drink={drink}/>
+      <DrinkDetail drink={drink} />
     </main>
   );
 }
